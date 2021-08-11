@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ComputerTechnicianBackend.Data.Domain.Models
 {
-    public class Request
+    public class Request : KeyedEntityBase
     {
-        
+        public string Address { get; set; }
+        public DateTime OrderDate { get; set; }
     }
 }

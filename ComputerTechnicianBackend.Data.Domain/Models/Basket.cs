@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ComputerTechnicianBackend.Data.Domain.Models
 {
-    public class Basket
+    public class Basket : KeyedEntityBase
     {
-        
+        public long Amount { get; set; }
+        public IList<ProductBasket> ProductBaskets { get; set; } = new List<ProductBasket>();
     }
 }

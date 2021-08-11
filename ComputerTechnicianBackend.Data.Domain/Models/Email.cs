@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ComputerTechnicianBackend.Data.Domain.Models
+﻿namespace ComputerTechnicianBackend.Data.Domain.Models
 {
-    public class Email
+    public class Email : KeyedEntityBase
     {
-        
+        public string Name { get; set; }
+        public PersonalData PersonalData { get; set; }
+        public long PersonalDataId { get; set; }
     }
 }

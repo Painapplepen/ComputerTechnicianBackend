@@ -1,6 +1,6 @@
 ﻿namespace ComputerTechnicianBackend.Data.Domain.Models
 {
-    public class Role : KeyedEntityBase
+    public class ProductType : KeyedEntityBase
     {
         public string Name { get; set; }
     }

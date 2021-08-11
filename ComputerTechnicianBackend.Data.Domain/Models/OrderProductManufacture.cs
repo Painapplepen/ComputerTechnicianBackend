@@ -1,12 +1,11 @@
 ﻿namespace ComputerTechnicianBackend.Data.Domain.Models
 {
-    public class SupplierProductManufacture
+    public class OrderProductManufacture : KeyedEntityBase
     {
-        public long Cost { get; set; }
         public long Amount { get; set; }
+        public Order Orders { get; set; }
+        public long OrderId { get; set; }
         public ProductManufacture ProductManufacture { get; set; }
         public long ProductManufactureId { get; set; }
-        public Supplier Supplier { get; set; }
-        public long SupplierId { get; set; }
     }
 }

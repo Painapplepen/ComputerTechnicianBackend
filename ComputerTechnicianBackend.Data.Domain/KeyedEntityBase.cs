@@ -1,6 +1,6 @@
 ﻿namespace ComputerTechnicianBackend.Data.Domain
 {
-    class KeyedEntityBase
+    public class KeyedEntityBase
     {
         public long Id { get; set; }
     }

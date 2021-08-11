@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ComputerTechnicianBackend.API.Contracts
+﻿namespace ComputerTechnicianBackend.API.Contracts
 {
     public class Class1
     {

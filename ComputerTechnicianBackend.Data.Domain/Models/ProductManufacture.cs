@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ComputerTechnicianBackend.Data.Domain.Models
+﻿namespace ComputerTechnicianBackend.Data.Domain.Models
 {
-    public class ProductManufacture
+    public class ProductManufacture : KeyedEntityBase
     {
-        
+        public Manufacture Manufacture { get; set; }
+        public long ManufactureId { get; set; }
+        public Product Product { get; set; }
+        public long ProductId { get; set; }
     }
 }

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ComputerTechnicianBackend.Data.Domain.Models
+﻿namespace ComputerTechnicianBackend.Data.Domain.Models
 {
-    public class CreditCard
+    public class CreditCard : KeyedEntityBase
     {
-        
-    }
+        public long CardNumber { get; set; }
+        public string EpirationDate { get; set; }
+        public PersonalData PersonalData { get; set; }
+        public long PersonalDataId { get; set; }
+     }
 }
