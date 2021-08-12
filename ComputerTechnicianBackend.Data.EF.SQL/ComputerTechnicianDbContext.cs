@@ -17,7 +17,7 @@ namespace ComputerTechnicianBackend.Data.EF.SQL
         public DbSet<Email> Emails { get; set; }
         public DbSet<Manufacture> Manufactures { get; set; }
         public DbSet<Order> Orders { get; set; }
-        public DbSet<OrderProductManufacture> OrderProductManufactures { get; set; }
+        public DbSet<OrderProduct> OrderProducts { get; set; }
         public DbSet<PersonalData> PersonalDatas { get; set; }
         public DbSet<Phone> Phones{ get; set; }
         public DbSet<Product> Products { get; set; }

@@ -12,12 +12,10 @@ namespace ComputerTechnicianBackend.Data.Domain.Models
         public string VidioCard { get; set; }
         public long MemoryCapacity { get; set; }
         public string DriveConfiguration { get; set; }
-        public long? ScreenDiagonal { get; set; }
+        public long ScreenDiagonal { get; set; }
         public string ScreenResolution { get; set; }
         public long Cost { get; set; }
         public ProductType ProductType { get; set; }
         public long ProductTypeId { get; set; }
-        public IList<ProductBasket> ProductBaskets { get; set; } = new List<ProductBasket>();
-        public IList<ProductManufacture> ProductManufactures { get; set; } = new List<ProductManufacture>();
     }
 }
