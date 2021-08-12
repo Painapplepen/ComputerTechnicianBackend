@@ -15,6 +15,8 @@ namespace ComputerTechnicianBackend.Data.Domain.Models
         public long ScreenDiagonal { get; set; }
         public string ScreenResolution { get; set; }
         public long Cost { get; set; }
+        public bool InStock { get; set; }
+        public long Amount { get; set; }
         public ProductType ProductType { get; set; }
         public long ProductTypeId { get; set; }
     }

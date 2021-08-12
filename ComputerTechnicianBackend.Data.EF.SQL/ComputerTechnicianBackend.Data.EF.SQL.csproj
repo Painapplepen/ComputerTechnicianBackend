@@ -12,9 +12,9 @@
   <ItemGroup>
     <ProjectReference Include="..\ComputerTechnicianBackend.Data.Domain\ComputerTechnicianBackend.Data.Domain.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="MappingConfigurtion\" />
-  </ItemGroup>
-
+	
+	<ItemGroup>
+		<Folder Include="MappingConfigurtion\" />
+	</ItemGroup>
+	
 </Project>
