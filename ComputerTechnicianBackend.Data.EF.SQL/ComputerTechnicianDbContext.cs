@@ -1,4 +1,5 @@
 ﻿using ComputerTechnicianBackend.Data.Domain.Models;
+using ComputerTechnicianBackend.Data.Domain.Views;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,7 @@ namespace ComputerTechnicianBackend.Data.EF.SQL
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<SupplierProductManufacture> SupplierProductManufactures { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<UserView> UsersView { get; set; }
 
         public ComputerTechnicianDbContext(DbContextOptions<ComputerTechnicianDbContext> options) 
             : base(options) { }
