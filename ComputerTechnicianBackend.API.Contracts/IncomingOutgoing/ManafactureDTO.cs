@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ComputerTechnicianBackend.API.Contracts.Outgoing
+namespace ComputerTechnicianBackend.API.Contracts.IncomingOutgoing
 {
-    public class FoundSupplierDTO
+    public class ManafactureDTO
     {
         public string Address { get; set; }
         public string City { get; set; }

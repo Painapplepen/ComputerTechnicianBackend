@@ -4,4 +4,14 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Abb.CqrsEs.Mediatr" Version="1.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ComputerTechnicianBackend.API.Contracts\ComputerTechnicianBackend.API.Contracts.csproj" />
+    <ProjectReference Include="..\ComputerTechnicianBackend.Data.Domain\ComputerTechnicianBackend.Data.Domain.csproj" />
+    <ProjectReference Include="..\ComputerTechnicianBackend.Data.Services\ComputerTechnicianBackend.Data.Services.csproj" />
+  </ItemGroup>
+
 </Project>

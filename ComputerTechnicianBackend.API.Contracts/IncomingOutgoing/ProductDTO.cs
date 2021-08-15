@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ComputerTechnicianBackend.API.Contracts.Outgoing
+namespace ComputerTechnicianBackend.API.Contracts.IncomingOutgoing
 {
-    public class FoundProductDTO
+    public class ProductDTO
     {
         public string Name { get; set; }
         public DateTime ReleaseDate { get; set; }
@@ -19,5 +19,6 @@ namespace ComputerTechnicianBackend.API.Contracts.Outgoing
         public long Cost { get; set; }
         public long Amount { get; set; }
         public bool InStock { get; set; }
+        public long ProductTypeId { get; set; }
     }
 }

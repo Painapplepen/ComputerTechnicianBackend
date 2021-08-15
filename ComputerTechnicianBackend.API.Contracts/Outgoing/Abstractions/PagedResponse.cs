@@ -2,7 +2,7 @@
 
 namespace ComputerTechnicianBackend.API.Contracts.Outgoing.Abstractions
 {
-    class PagedResponse<TFoundItem>
+    public class PagedResponse<TFoundItem>
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="PagedResponse{T}" /> class.

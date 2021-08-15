@@ -10,5 +10,7 @@
         public long RoleId { get; set; }
         public Basket Basket { get; set; }
         public long BasketId { get; set; }
+        public Email Email { get; set; }
+        public long EmailId { get; set; }
     }
 }
