@@ -1,6 +1,6 @@
 ﻿namespace ComputerTechnicianBackend.API.Contracts.Outgoing
 {
-    class FoundManufactureDTO
+    public class FoundManufactureDTO
     {
         public string Address { get; set; }
         public string City { get; set; }

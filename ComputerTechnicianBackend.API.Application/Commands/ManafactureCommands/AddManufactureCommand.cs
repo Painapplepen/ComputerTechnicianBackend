@@ -19,9 +19,9 @@ namespace ComputerTechnicianBackend.API.Application.Commands.ManafactureCommands
 
     public class AddManafctureCommandHandler : IRequestHandler<AddManufactureCommand, long>
     {
-        private readonly IManafactureService manafactureService;
+        private readonly IManufactureService manafactureService;
 
-        public AddManafctureCommandHandler(IManafactureService manafactureService)
+        public AddManafctureCommandHandler(IManufactureService manafactureService)
         {
             this.manafactureService = manafactureService;
         }

@@ -13,18 +13,18 @@ using ComputerTechnicianBackend.Data.Services.Extensions;
 
 namespace ComputerTechnicianBackend.Data.Services
 {
-    public interface IManafactureService : IBaseService<Manufacture>
+    public interface IManufactureService : IBaseService<Manufacture>
     {
         Task<IReadOnlyCollection<Manufacture>> FindAsync(ManufactureSearchCondition searchCondition, string sortProperty);
         Task<long> CountAsync(ManufactureSearchCondition searchCondition);
         Task<bool> ExistsAsync(long id, CancellationToken cancellationToken);
     }
 
-    public class ManafactureService : BaseService<Manufacture>, IManafactureService
+    public class ManufactureService : BaseService<Manufacture>, IManufactureService
     {
         private readonly ComputerTechnicianDbContext dbContext;
 
-        public ManafactureService(ComputerTechnicianDbContext dbContext) : base(dbContext)
+        public ManufactureService(ComputerTechnicianDbContext dbContext) : base(dbContext)
         {
             this.dbContext = dbContext;
         }

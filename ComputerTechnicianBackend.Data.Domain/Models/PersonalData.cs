@@ -13,7 +13,5 @@ namespace ComputerTechnicianBackend.Data.Domain.Models
         public long CreditCardId { get; set; }
         public Phone Phones { get; set; }
         public long PhoneId { get; set; }
-        public Email Email { get; set; }
-        public long EmailId { get; set; }
     }
 }
