@@ -2,7 +2,7 @@
 
 namespace ComputerTechnicianBackend.API.Contracts.Incoming.SearchConditions
 {
-    public class ManafactureSearchCondition : PagedDTOBase
+    public class ManufactureSearchCondition : PagedDTOBase
     {
         public string[] Address { get; set; }
         public string[] City { get; set; }

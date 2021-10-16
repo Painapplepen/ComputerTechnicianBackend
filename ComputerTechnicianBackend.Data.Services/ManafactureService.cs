@@ -15,8 +15,8 @@ namespace ComputerTechnicianBackend.Data.Services
 {
     public interface IManafactureService : IBaseService<Manufacture>
     {
-        Task<IReadOnlyCollection<Manufacture>> FindAsync(ManafactureSearchCondition searchCondition, string sortProperty);
-        Task<long> CountAsync(ManafactureSearchCondition searchCondition);
+        Task<IReadOnlyCollection<Manufacture>> FindAsync(ManufactureSearchCondition searchCondition, string sortProperty);
+        Task<long> CountAsync(ManufactureSearchCondition searchCondition);
         Task<bool> ExistsAsync(long id, CancellationToken cancellationToken);
     }
 
@@ -34,7 +34,7 @@ namespace ComputerTechnicianBackend.Data.Services
             return dbContext.Manufactures.AnyAsync(entity => entity.Id == id, cancellationToken);
         }
 
-        public async Task<IReadOnlyCollection<Manufacture>> FindAsync(ManafactureSearchCondition searchCondition,
+        public async Task<IReadOnlyCollection<Manufacture>> FindAsync(ManufactureSearchCondition searchCondition,
            string sortProperty)
         {
             IQueryable<Manufacture> query = BuildFindQuery(searchCondition);
@@ -46,16 +46,16 @@ namespace ComputerTechnicianBackend.Data.Services
             return await query.Page(searchCondition.PageSize, searchCondition.Page).ToListAsync();
         }
 
-        public async Task<long> CountAsync(ManafactureSearchCondition searchCondition)
+        public async Task<long> CountAsync(ManufactureSearchCondition searchCondition)
         {
             IQueryable<Manufacture> query = BuildFindQuery(searchCondition);
 
             var count = await query.LongCountAsync();
 
-            return count % 10 == 0 ? count / 10 : count / 10 + 1;
+            return count;
         }
 
-        private IQueryable<Manufacture> BuildFindQuery(ManafactureSearchCondition searchCondition)
+        private IQueryable<Manufacture> BuildFindQuery(ManufactureSearchCondition searchCondition)
         {
             IQueryable<Manufacture> query = dbContext.Manufactures;
 

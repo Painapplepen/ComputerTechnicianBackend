@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ComputerTechnicianBackend.API.Contracts.IncomingOutgoing
 {
-    public class ManafactureDTO
+    public class ManufactureDTO
     {
         public string Address { get; set; }
         public string City { get; set; }

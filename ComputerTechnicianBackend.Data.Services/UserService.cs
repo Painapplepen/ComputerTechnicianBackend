@@ -53,7 +53,7 @@ namespace ComputerTechnicianBackend.Data.Services
 
             var count = await query.LongCountAsync();
 
-            return count % 10 == 0 ? count / 10 : count / 10 + 1;
+            return count;
         }
 
         private IQueryable<UserView> BuildFindQuery(UserSearchCondition searchCondition)
