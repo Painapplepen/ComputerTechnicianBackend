@@ -36,10 +36,10 @@ namespace ComputerTechnicianBackend.API.Application.Queries.OrderQueries
                 return null;
             }
 
-            return MapToAuthorDTO(order);
+            return MapToOrderDTO(order);
         }
 
-        private OrderDTO MapToAuthorDTO(Order order)
+        private OrderDTO MapToOrderDTO(Order order)
         {
             return new OrderDTO
             {

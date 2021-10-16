@@ -15,7 +15,6 @@ namespace ComputerTechnicianBackend.Data.EF.SQL
         public DbSet<Basket> Baskets { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<CreditCard> CreditCards { get; set; }
-        public DbSet<UserName> UserNames { get; set; }
         public DbSet<Manufacture> Manufactures { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderProduct> OrderProducts { get; set; }

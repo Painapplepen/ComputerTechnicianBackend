@@ -28,17 +28,17 @@ namespace ComputerTechnicianBackend.API.Application.Queries.SupplierQueries
 
         public async Task<SupplierDTO> Handle(GetSupplierQuery request, CancellationToken cancellationToken)
         {
-            var author = await supplierService.GetAsync(request.Id, cancellationToken);
+            var supplier = await supplierService.GetAsync(request.Id, cancellationToken);
 
-            if (author == null)
+            if (supplier == null)
             {
                 return null;
             }
 
-            return MapToAuthorDTO(author);
+            return MapToSupplierDTO(supplier);
         }
 
-        private SupplierDTO MapToAuthorDTO(Supplier supplier)
+        private SupplierDTO MapToSupplierDTO(Supplier supplier)
         {
             return new SupplierDTO
             {

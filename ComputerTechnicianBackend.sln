@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30413.136
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31808.319
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComputerTechnicianBackend.API.Host", "ComputerTechnicianBackend\ComputerTechnicianBackend.API.Host.csproj", "{EFE5A4B2-0DD4-4E2C-AEFB-AD2966FCEA30}"
 EndProject
@@ -9,17 +9,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{A45E71A3-BF6
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data access", "Data access", "{19004BF2-44BF-4506-9E70-82180AEF79CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComputerTechnicianBackend.API.Application", "ComputerTechnicianBackend.API.Application\ComputerTechnicianBackend.API.Application.csproj", "{59B724EF-38EB-473C-BB5F-131165E71DED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComputerTechnicianBackend.API.Application", "ComputerTechnicianBackend.API.Application\ComputerTechnicianBackend.API.Application.csproj", "{59B724EF-38EB-473C-BB5F-131165E71DED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComputerTechnicianBackend.API.Contracts", "ComputerTechnicianBackend.API.Contracts\ComputerTechnicianBackend.API.Contracts.csproj", "{F26D3661-52B1-4D5D-8C4C-646E5A0C7B5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComputerTechnicianBackend.API.Contracts", "ComputerTechnicianBackend.API.Contracts\ComputerTechnicianBackend.API.Contracts.csproj", "{F26D3661-52B1-4D5D-8C4C-646E5A0C7B5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComputerTechnicianBackend.API.Resources", "ComputerTechnicianBackend.API.Resources\ComputerTechnicianBackend.API.Resources.csproj", "{A4A3F935-6F2A-4C54-83B2-247C7FF1806F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComputerTechnicianBackend.Data.Domain", "ComputerTechnicianBackend.Data.Domain\ComputerTechnicianBackend.Data.Domain.csproj", "{EB4E27E0-5685-4DAE-80D9-D8F42972D7E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComputerTechnicianBackend.Data.Domain", "ComputerTechnicianBackend.Data.Domain\ComputerTechnicianBackend.Data.Domain.csproj", "{EB4E27E0-5685-4DAE-80D9-D8F42972D7E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComputerTechnicianBackend.Data.EF.SQL", "ComputerTechnicianBackend.Data.EF.SQL\ComputerTechnicianBackend.Data.EF.SQL.csproj", "{24B07EE2-3821-405B-877B-181117FCBBE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComputerTechnicianBackend.Data.EF.SQL", "ComputerTechnicianBackend.Data.EF.SQL\ComputerTechnicianBackend.Data.EF.SQL.csproj", "{24B07EE2-3821-405B-877B-181117FCBBE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComputerTechnicianBackend.Data.Services", "ComputerTechnicianBackend.Data.Services\ComputerTechnicianBackend.Data.Services.csproj", "{CF87A312-B483-4AFC-9611-2006D8271F59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComputerTechnicianBackend.Data.Services", "ComputerTechnicianBackend.Data.Services\ComputerTechnicianBackend.Data.Services.csproj", "{CF87A312-B483-4AFC-9611-2006D8271F59}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComputerTechnicianBackend.API.Resources", "ComputerTechnicianBackend.API.Resources\ComputerTechnicianBackend.API.Resources.csproj", "{A843B303-DF49-4D17-8A48-C908C76AA1D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,10 +39,6 @@ Global
 		{F26D3661-52B1-4D5D-8C4C-646E5A0C7B5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F26D3661-52B1-4D5D-8C4C-646E5A0C7B5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F26D3661-52B1-4D5D-8C4C-646E5A0C7B5B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A4A3F935-6F2A-4C54-83B2-247C7FF1806F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A4A3F935-6F2A-4C54-83B2-247C7FF1806F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A4A3F935-6F2A-4C54-83B2-247C7FF1806F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A4A3F935-6F2A-4C54-83B2-247C7FF1806F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EB4E27E0-5685-4DAE-80D9-D8F42972D7E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EB4E27E0-5685-4DAE-80D9-D8F42972D7E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB4E27E0-5685-4DAE-80D9-D8F42972D7E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -55,6 +51,10 @@ Global
 		{CF87A312-B483-4AFC-9611-2006D8271F59}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF87A312-B483-4AFC-9611-2006D8271F59}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF87A312-B483-4AFC-9611-2006D8271F59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A843B303-DF49-4D17-8A48-C908C76AA1D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A843B303-DF49-4D17-8A48-C908C76AA1D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A843B303-DF49-4D17-8A48-C908C76AA1D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A843B303-DF49-4D17-8A48-C908C76AA1D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,10 +63,10 @@ Global
 		{EFE5A4B2-0DD4-4E2C-AEFB-AD2966FCEA30} = {A45E71A3-BF66-43EA-B5D7-C94CD1EFD1B2}
 		{59B724EF-38EB-473C-BB5F-131165E71DED} = {A45E71A3-BF66-43EA-B5D7-C94CD1EFD1B2}
 		{F26D3661-52B1-4D5D-8C4C-646E5A0C7B5B} = {A45E71A3-BF66-43EA-B5D7-C94CD1EFD1B2}
-		{A4A3F935-6F2A-4C54-83B2-247C7FF1806F} = {A45E71A3-BF66-43EA-B5D7-C94CD1EFD1B2}
 		{EB4E27E0-5685-4DAE-80D9-D8F42972D7E3} = {19004BF2-44BF-4506-9E70-82180AEF79CF}
 		{24B07EE2-3821-405B-877B-181117FCBBE3} = {19004BF2-44BF-4506-9E70-82180AEF79CF}
 		{CF87A312-B483-4AFC-9611-2006D8271F59} = {19004BF2-44BF-4506-9E70-82180AEF79CF}
+		{A843B303-DF49-4D17-8A48-C908C76AA1D9} = {A45E71A3-BF66-43EA-B5D7-C94CD1EFD1B2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9E2ED09F-570C-4077-B4DC-46448D4E04A6}
