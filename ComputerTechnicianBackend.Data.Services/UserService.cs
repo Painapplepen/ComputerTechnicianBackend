@@ -1,104 +1,114 @@
-﻿using ComputerTechnicianBackend.API.Contracts.Incoming.SearchConditions;
+﻿using ComputerTechnicianBackend.API.Contracts.IncomingOutgoing;
 using ComputerTechnicianBackend.Data.Domain.Models;
-using ComputerTechnicianBackend.Data.EF.SQL;
 using ComputerTechnicianBackend.Data.Services.Abstraction;
-using Microsoft.EntityFrameworkCore;
+using ComputerTechnicianBackend.Data.EF.SQL;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using ComputerTechnicianBackend.Data.Services.Extensions;
-using ComputerTechnicianBackend.Data.Domain.Views;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.Configuration;
+using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace ComputerTechnicianBackend.Data.Services
 {
-    public interface IUserService : IBaseService<UserView>
+    public interface IUserService : IBaseService<User> 
     {
-        Task<IReadOnlyCollection<UserView>> FindAsync(UserSearchCondition searchCondition, string sortProperty);
-        Task<long> CountAsync(UserSearchCondition searchCondition);
-        Task<bool> ExistsAsync(long id, CancellationToken cancellationToken);
+        Task<bool> ExistAsync(UserDTO user);
+        Task<bool> LoginAsync(UserDTO user);
+        string CreateToken(User user, string role);
     }
 
-    public class UserService : BaseService<UserView>, IUserService
+    public class UserService : BaseService<User> , IUserService
     {
         private readonly ComputerTechnicianDbContext dbContext;
+        private readonly IConfiguration configuration;
 
-        public UserService(ComputerTechnicianDbContext dbContext) : base(dbContext)
+        public UserService(ComputerTechnicianDbContext dbContext, IConfiguration configuration) : base(dbContext)
         {
             this.dbContext = dbContext;
+            this.configuration = configuration;
         }
 
-        public Task<bool> ExistsAsync(long id, CancellationToken cancellationToken)
+        public async Task<bool> ExistAsync(UserDTO userDTO)
         {
-            return dbContext.Users.AnyAsync(entity => entity.Id == id, cancellationToken);
+            if (!await dbContext.Users.AnyAsync(entity =>
+                entity.Email == userDTO.Email))
+            {
+                return false;
+            }
+
+            return true;
         }
 
-        public async Task<IReadOnlyCollection<UserView>> FindAsync(UserSearchCondition searchCondition,
-           string sortProperty)
+        public async Task<bool> LoginAsync(UserDTO userDTO)
         {
-            IQueryable<UserView> query = BuildFindQuery(searchCondition);
+            var user = await dbContext.Users.Where(entity => entity.Email == userDTO.Email).FirstOrDefaultAsync();
 
-            query = searchCondition.SortDirection == "asc"
-                ? query.OrderBy(sortProperty)
-                : query.OrderByDescending(sortProperty);
+            if (user.Password != userDTO.Password)
+            {
+                return false;
+            }
 
-            return await query.Page(searchCondition.PageSize, searchCondition.Page).ToListAsync();
+            return true;
         }
 
-        public async Task<long> CountAsync(UserSearchCondition searchCondition)
+        public string CreateToken(User user, string role)
         {
-            IQueryable<UserView> query = BuildFindQuery(searchCondition);
+            var signingCredentials = GetSigningCredentials();
+            var Claims = GetClaims(user, role);
+            var tokenOptions = GenerateTokenOptions(signingCredentials, Claims);
 
-            var count = await query.LongCountAsync();
-
-            return count;
+            return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
         }
 
-        private IQueryable<UserView> BuildFindQuery(UserSearchCondition searchCondition)
+        private SigningCredentials GetSigningCredentials()
         {
-            IQueryable<UserView> query = dbContext.UsersView;
+            var key = configuration.GetSection("JwtSettings").GetSection("key").Value;
+            var secret = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key + key));
 
-            if (searchCondition.UserName.Any())
+            return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
+        }
+
+        private List<Claim> GetClaims(User user, string role)
+        {
+            var claims = new List<Claim>
             {
-                foreach (var userName in searchCondition.UserName)
-                {
-                    var upperUserName = userName.ToUpper().Trim();
-                    query = query.Where(x =>
-                        x.UserName != null && x.UserName.ToUpper().Contains(upperUserName));
-                }
-            }
+                new Claim(ClaimTypes.Name, user.UserName)
+            };
 
-            if (searchCondition.Email.Any())
-            {
-                foreach (var email in searchCondition.Email)
-                {
-                    var upperEmail = email.ToUpper().Trim();
-                    query = query.Where(x =>
-                        x.Email != null && x.Email.ToUpper().Contains(upperEmail));
-                }
-            }
+            var binaryRole = ToBinary(ConvertToByteArray(role, Encoding.ASCII));
 
-            if (searchCondition.Role.Any())
-            {
-                foreach (var role in searchCondition.Role)
-                {
-                    var upperRole = role.ToUpper().Trim();
-                    query = query.Where(x =>
-                        x.Role != null && x.Role.ToUpper().Contains(upperRole));
-                }
-            }
+            claims.Add(new Claim(ClaimTypes.Role, binaryRole));
+            
+            return claims;
+        }
 
-            if (searchCondition.BasketSize != null)
-            {
-                foreach (var basketSize in searchCondition.BasketSize)
-                {
-                    query = query.Where(x => x.BasketSize == basketSize);
-                }
-            }
+        private JwtSecurityToken GenerateTokenOptions(SigningCredentials signingCredentials, List<Claim> claims)
+        {
+            var jwtSettings = configuration.GetSection("jwtSettings");
+            var tokenOptions = new JwtSecurityToken
+            (
+                issuer: jwtSettings.GetSection("validIssuer").Value,
+                audience: jwtSettings.GetSection("validAudience").Value,
+                claims: claims,
+                expires: DateTime.Now.AddMinutes(Convert.ToDouble(jwtSettings.GetSection("minutesExpires").Value)),
+                signingCredentials: signingCredentials
+            );
+            return tokenOptions;
+        }
 
-            return query;
+        private static byte[] ConvertToByteArray(string str, Encoding encoding)
+        {
+            return encoding.GetBytes(str);
+        }
+
+        private static String ToBinary(Byte[] data)
+        {
+            return string.Join(" ", data.Select(byt => Convert.ToString(byt, 2).PadLeft(8, '0')));
         }
     }
 }

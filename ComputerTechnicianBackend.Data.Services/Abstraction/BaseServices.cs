@@ -8,11 +8,11 @@ namespace ComputerTechnicianBackend.Data.Services.Abstraction
 {
     public interface IBaseService<TEntity> where TEntity : class
     {
-        Task<TEntity> GetAsync(long? id, CancellationToken cancellationToken);
-        Task<IReadOnlyCollection<TEntity>> GetAllAsync(CancellationToken cancellationToken);
+        Task<TEntity> GetAsync(long? id, CancellationToken cancellationToken = default);
+        Task<IReadOnlyCollection<TEntity>> GetAllAsync(CancellationToken cancellationToken = default);
         Task<TEntity> InsertAsync(TEntity newEntity);
         Task<TEntity> UpdateAsync(TEntity newEntity);
-        Task DeleteAsync(long id, CancellationToken cancellationToken);
+        Task DeleteAsync(long id, CancellationToken cancellationToken = default);
     }
     public abstract class BaseService<TEntity> : IBaseService<TEntity>
         where TEntity : class

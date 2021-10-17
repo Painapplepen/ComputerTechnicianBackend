@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="MappingConfigurtion\**" />
+    <EmbeddedResource Remove="MappingConfigurtion\**" />
+    <None Remove="MappingConfigurtion\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.9" />
   </ItemGroup>
@@ -12,9 +18,5 @@
   <ItemGroup>
     <ProjectReference Include="..\ComputerTechnicianBackend.Data.Domain\ComputerTechnicianBackend.Data.Domain.csproj" />
   </ItemGroup>
-	
-	<ItemGroup>
-		<Folder Include="MappingConfigurtion\" />
-	</ItemGroup>
 	
 </Project>

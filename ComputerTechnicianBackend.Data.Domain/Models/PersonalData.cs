@@ -8,10 +8,10 @@ namespace ComputerTechnicianBackend.Data.Domain.Models
         public string SecondName { get; set; }
         public DateTime DateOfBirth { get; set; }
         public City Cities { get; set; }
-        public long CityId { get; set; }
+        public long? CityId { get; set; }
         public CreditCard CreditCards { get; set; }
-        public long CreditCardId { get; set; }
+        public long? CreditCardId { get; set; }
         public Phone Phones { get; set; }
-        public long PhoneId { get; set; }
+        public long? PhoneId { get; set; }
     }
 }
