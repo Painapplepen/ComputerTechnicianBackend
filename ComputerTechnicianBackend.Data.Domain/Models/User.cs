@@ -9,7 +9,7 @@
         public Role Roles { get; set; }
         public long RoleId { get; set; }
         public Basket Basket { get; set; }
-        public long BasketId { get; set; }
+        public long? BasketId { get; set; }
         public string Email { get; set; }
     }
 }

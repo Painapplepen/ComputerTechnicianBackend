@@ -11,9 +11,9 @@ namespace ComputerTechnicianBackend.API.Contracts.IncomingOutgoing
         public string Name { get; set; }
         public string SecondName { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public long CityId { get; set; }
+        public string City { get; set; }
         public string Phone { get; set; }
-        public string CreditCards { get; set; }
-        public string Email { get; set; }
+        public long CardNumber { get; set; }
+        public string EpirationDate { get; set; }
     }
 }
