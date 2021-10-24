@@ -9,15 +9,16 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using ComputerTechnicianBackend.API.Contracts.Outgoing.Abstractions;
 
 namespace ComputerTechnicianBackend.API.Application.Commands.ProductCommands
 {
-    public class UpdateProductCommand : ProductCommandBase<ProductDTO>
+    public class UpdateProductCommand : ProductCommandBase<Response>
     {
         public UpdateProductCommand(long id, ProductDTO update) : base(id, update) { }
     }
 
-    public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand, ProductDTO>
+    public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand, Response>
     {
         private readonly IProductService productService;
 
@@ -26,15 +27,25 @@ namespace ComputerTechnicianBackend.API.Application.Commands.ProductCommands
             this.productService = productService;
         }
 
-        public async Task<ProductDTO> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
+        public async Task<Response> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
             var product = await productService.GetAsync(request.Id, cancellationToken);
+
+            if (product == null)
+            {
+                return Response.Error;
+            }
 
             var productToUpdate = MapDTOToProduct(request.Entity, product);
 
             var updatedProduct = await productService.UpdateAsync(productToUpdate);
 
-            return MapToProductDTO(updatedProduct);
+            if (updatedProduct == null)
+            {
+                return Response.Error;
+            }
+
+            return Response.Successful;
         }
 
         public Product MapDTOToProduct(ProductDTO productDTO, Product product)

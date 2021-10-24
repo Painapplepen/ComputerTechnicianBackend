@@ -58,6 +58,7 @@ namespace ComputerTechnicianBackend.API.Application.Queries.OrderQueries
         {
             return new FoundOrderDTO
             {
+                Id = order.Id,
                 OrderStatus = order.OrderStatus,
                 OrderDate = order.OrderDate,
                 OrderTime = order.OrderTime

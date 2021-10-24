@@ -9,15 +9,16 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using ComputerTechnicianBackend.API.Contracts.Outgoing.Abstractions;
 
 namespace ComputerTechnicianBackend.API.Application.Commands.SupplierCommands
 {
-    public class UpdateSupplierCommand : SupplierCommandBase<SupplierDTO>
+    public class UpdateSupplierCommand : SupplierCommandBase<Response>
     {
         public UpdateSupplierCommand(long id, SupplierDTO update) : base(id, update) { }
     }
 
-    public class UpdateSupplierCommandHandler : IRequestHandler<UpdateSupplierCommand, SupplierDTO>
+    public class UpdateSupplierCommandHandler : IRequestHandler<UpdateSupplierCommand, Response>
     {
         private readonly ISupplierService supplierService;
 
@@ -26,15 +27,25 @@ namespace ComputerTechnicianBackend.API.Application.Commands.SupplierCommands
             this.supplierService = supplierService;
         }
 
-        public async Task<SupplierDTO> Handle(UpdateSupplierCommand request, CancellationToken cancellationToken)
+        public async Task<Response> Handle(UpdateSupplierCommand request, CancellationToken cancellationToken)
         {
             var supplier = await supplierService.GetAsync(request.Id, cancellationToken);
+
+            if (supplier == null)
+            {
+                return Response.Error;
+            }
 
             var supplierToUpdate = MapDTOToSupplier(request.Entity, supplier);
 
             var updatedSupplier = await supplierService.UpdateAsync(supplierToUpdate);
 
-            return MapToSupplierDTO(updatedSupplier);
+            if (updatedSupplier == null)
+            {
+                return Response.Error;
+            }
+
+            return Response.Successful;
         }
 
         public Supplier MapDTOToSupplier(SupplierDTO supplierDTO, Supplier supplier)
@@ -45,17 +56,6 @@ namespace ComputerTechnicianBackend.API.Application.Commands.SupplierCommands
             supplier.Name = supplierDTO.Name;
 
             return supplier;
-        }
-
-        public SupplierDTO MapToSupplierDTO(Supplier supplier)
-        {
-            return new SupplierDTO()
-            {
-                Address = supplier.Address,
-                City = supplier.City,
-                Country = supplier.Country,
-                Name = supplier.Name
-            };
         }
     }
 }

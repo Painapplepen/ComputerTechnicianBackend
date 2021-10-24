@@ -4,6 +4,7 @@ namespace ComputerTechnicianBackend.API.Contracts.Outgoing
 {
     public class FoundProductDTO
     {
+        public long Id { get; set; }
         public string Name { get; set; }
         public DateTime ReleaseDate { get; set; }
         public string Processor { get; set; }

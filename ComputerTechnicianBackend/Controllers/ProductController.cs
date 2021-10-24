@@ -8,6 +8,7 @@ using ComputerTechnicianBackend.API.Contracts.Outgoing;
 using ComputerTechnicianBackend.API.Contracts.Outgoing.Abstractions;
 using LibraryService.API.Host.Controllers.Abstractions;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -17,12 +18,14 @@ namespace ComputerTechnicianBackend.API.Host.Controllers
 {
     [Route("api/product")]
     [ApiController]
+    [Authorize]
     public class ProductController : MediatingControllerBase
     {
         public ProductController(IMediator mediator) : base(mediator)
         { }
 
         [HttpPost("search")]
+        [AllowAnonymous]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(PagedResponse<FoundProductDTO>))]
         [SwaggerOperation(Summary = "Search products", OperationId = "SearchProduct")]
         public async Task<IActionResult> SearchProducts([FromBody] ProductSearchCondition searchCondition, CancellationToken cancellationToken = default)

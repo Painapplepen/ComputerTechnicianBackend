@@ -9,15 +9,16 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using ComputerTechnicianBackend.API.Contracts.Outgoing.Abstractions;
 
 namespace ComputerTechnicianBackend.API.Application.Commands.OrderCommands
 {
-    public class UpdateOrderCommand : OrderCommandBase<OrderDTO>
+    public class UpdateOrderCommand : OrderCommandBase<Response>
     {
         public UpdateOrderCommand(long id, OrderDTO update) : base(id, update) { }
     }
 
-    public class UpdateOrderCommandHandler : IRequestHandler<UpdateOrderCommand, OrderDTO>
+    public class UpdateOrderCommandHandler : IRequestHandler<UpdateOrderCommand, Response>
     {
         private readonly IOrderService orderService;
 
@@ -26,15 +27,25 @@ namespace ComputerTechnicianBackend.API.Application.Commands.OrderCommands
             this.orderService = orderService;
         }
 
-        public async Task<OrderDTO> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
+        public async Task<Response> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
         {
             var order = await orderService.GetAsync(request.Id, cancellationToken);
+
+            if (order == null)
+            {
+                return Response.Error;
+            }
 
             var orderToUpdate = MapDTOToOrder(request.Entity, order);
 
             var updatedOrder = await orderService.UpdateAsync(orderToUpdate);
 
-            return MapToOrderDTO(updatedOrder);
+            if (updatedOrder == null)
+            {
+                return Response.Error;
+            }
+
+            return Response.Successful;
         }
 
         public Order MapDTOToOrder(OrderDTO orderDTO, Order order)

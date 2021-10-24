@@ -61,6 +61,7 @@ namespace ComputerTechnicianBackend.API.Application.Queries.ManafactureQueries
         {
             return new FoundManufactureDTO
             {
+                Id = manufacture.Id,
                 Address = manufacture.Address,
                 City = manufacture.City,
                 Country = manufacture.Country,

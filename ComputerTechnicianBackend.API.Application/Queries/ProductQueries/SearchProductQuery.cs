@@ -66,6 +66,7 @@ namespace ComputerTechnicianBackend.API.Application.Queries.ProductQueries
         {
             return new FoundProductDTO
             {
+                Id = product.Id,
                 Name = product.Name,
                 ReleaseDate = product.ReleaseDate,
                 Processor = product.Processor,

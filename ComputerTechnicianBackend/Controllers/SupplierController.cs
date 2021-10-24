@@ -10,6 +10,7 @@ using ComputerTechnicianBackend.API.Contracts.Outgoing;
 using ComputerTechnicianBackend.API.Contracts.Outgoing.Abstractions;
 using LibraryService.API.Host.Controllers.Abstractions;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -18,6 +19,7 @@ namespace ComputerTechnicianBackend.API.Host.Controllers
 {
     [Route("api/supplier")]
     [ApiController]
+    [Authorize]
     public class SupplierController : MediatingControllerBase
     {
         public SupplierController(IMediator mediator) : base(mediator)

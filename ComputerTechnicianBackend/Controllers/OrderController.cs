@@ -8,6 +8,7 @@ using ComputerTechnicianBackend.API.Contracts.Outgoing;
 using ComputerTechnicianBackend.API.Contracts.Outgoing.Abstractions;
 using LibraryService.API.Host.Controllers.Abstractions;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -16,6 +17,7 @@ namespace ComputerTechnicianBackend.API.Host.Controllers
 {
     [Route("api/order")]
     [ApiController]
+    [Authorize]
     public class OrderController : MediatingControllerBase
     {
         public OrderController(IMediator mediator) : base(mediator)

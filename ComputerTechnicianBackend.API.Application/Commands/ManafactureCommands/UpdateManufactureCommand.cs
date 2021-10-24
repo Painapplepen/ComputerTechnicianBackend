@@ -9,15 +9,16 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using ComputerTechnicianBackend.API.Contracts.Outgoing.Abstractions;
 
 namespace ComputerTechnicianBackend.API.Application.Commands.ManafactureCommands
 {   
-    public class UpdateManufactureCommand : ManufactureCommandBase<ManufactureDTO>
+    public class UpdateManufactureCommand : ManufactureCommandBase<Response>
     {
         public UpdateManufactureCommand(long id, ManufactureDTO update) : base(id, update) { }
     }
 
-    public class UpdateManufactureCommandHandler : IRequestHandler<UpdateManufactureCommand, ManufactureDTO>
+    public class UpdateManufactureCommandHandler : IRequestHandler<UpdateManufactureCommand, Response>
     {
         private readonly IManufactureService manufactureService;
 
@@ -26,15 +27,25 @@ namespace ComputerTechnicianBackend.API.Application.Commands.ManafactureCommands
             this.manufactureService = manufactureService;
         }
 
-        public async Task<ManufactureDTO> Handle(UpdateManufactureCommand request, CancellationToken cancellationToken)
+        public async Task<Response> Handle(UpdateManufactureCommand request, CancellationToken cancellationToken)
         {
             var manufacture = await manufactureService.GetAsync(request.Id, cancellationToken);
+
+            if (manufacture == null)
+            {
+                return Response.Error;
+            }
 
             var manufactureToUpdate = MapDTOToManafacture(request.Entity, manufacture);
 
             var updatedManufacture = await manufactureService.UpdateAsync(manufactureToUpdate);
 
-            return MapToManafactureDTO(updatedManufacture);
+            if (updatedManufacture == null)
+            {
+                return Response.Error;
+            }
+
+            return Response.Successful;
         }
 
         public Manufacture MapDTOToManafacture(ManufactureDTO manufactureDTO, Manufacture manufacture)

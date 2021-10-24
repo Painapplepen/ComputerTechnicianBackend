@@ -61,6 +61,7 @@ namespace ComputerTechnicianBackend.API.Application.Queries.SupplierQueries
         {
             return new FoundSupplierDTO
             {
+                Id = supplier.Id,
                 Address = supplier.Address,
                 City = supplier.City,
                 Country = supplier.Country,
