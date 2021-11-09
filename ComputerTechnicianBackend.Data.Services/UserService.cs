@@ -18,7 +18,7 @@ namespace ComputerTechnicianBackend.Data.Services
     public interface IUserService : IBaseService<User> 
     {
         Task<bool> ExistAsync(UserDTO user);
-        Task<User> LoginAsync(UserDTO user);
+        Task<User> LoginAsync(LoginDTO user);
         string CreateToken(User user, string role);
     }
 
@@ -44,7 +44,7 @@ namespace ComputerTechnicianBackend.Data.Services
             return true;
         }
 
-        public async Task<User> LoginAsync(UserDTO userDTO)
+        public async Task<User> LoginAsync(LoginDTO userDTO)
         {
             if (!await dbContext.Users.AnyAsync(entity =>
                 entity.Email == userDTO.Email))

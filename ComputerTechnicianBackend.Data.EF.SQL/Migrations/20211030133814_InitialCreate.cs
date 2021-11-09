@@ -35,19 +35,6 @@ namespace ComputerTechnicianBackend.Data.EF.SQL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Emails",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Emails", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Manufactures",
                 columns: table => new
                 {
@@ -133,6 +120,22 @@ namespace ComputerTechnicianBackend.Data.EF.SQL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UsersView",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Role = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BasketSize = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UsersView", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
@@ -163,10 +166,9 @@ namespace ComputerTechnicianBackend.Data.EF.SQL.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SecondName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CityId = table.Column<long>(type: "bigint", nullable: false),
-                    CreditCardId = table.Column<long>(type: "bigint", nullable: false),
-                    PhoneId = table.Column<long>(type: "bigint", nullable: false),
-                    EmailId = table.Column<long>(type: "bigint", nullable: false)
+                    CityId = table.Column<long>(type: "bigint", nullable: true),
+                    CreditCardId = table.Column<long>(type: "bigint", nullable: true),
+                    PhoneId = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -176,25 +178,19 @@ namespace ComputerTechnicianBackend.Data.EF.SQL.Migrations
                         column: x => x.CityId,
                         principalTable: "Cities",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_PersonalDatas_CreditCards_CreditCardId",
                         column: x => x.CreditCardId,
                         principalTable: "CreditCards",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_PersonalDatas_Emails_EmailId",
-                        column: x => x.EmailId,
-                        principalTable: "Emails",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_PersonalDatas_Phones_PhoneId",
                         column: x => x.PhoneId,
                         principalTable: "Phones",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -262,9 +258,10 @@ namespace ComputerTechnicianBackend.Data.EF.SQL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PersonalDataId = table.Column<long>(type: "bigint", nullable: false),
+                    PersonalDataId = table.Column<long>(type: "bigint", nullable: true),
                     RoleId = table.Column<long>(type: "bigint", nullable: false),
-                    BasketId = table.Column<long>(type: "bigint", nullable: false)
+                    BasketId = table.Column<long>(type: "bigint", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -274,7 +271,7 @@ namespace ComputerTechnicianBackend.Data.EF.SQL.Migrations
                         column: x => x.PersonalDataId,
                         principalTable: "PersonalDatas",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Users_Roles_RoleId",
                         column: x => x.RoleId,
@@ -342,7 +339,7 @@ namespace ComputerTechnicianBackend.Data.EF.SQL.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Amount = table.Column<long>(type: "bigint", nullable: false)
+                    Amount = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -352,7 +349,7 @@ namespace ComputerTechnicianBackend.Data.EF.SQL.Migrations
                         column: x => x.Amount,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -440,7 +437,8 @@ namespace ComputerTechnicianBackend.Data.EF.SQL.Migrations
                 name: "IX_Baskets_Amount",
                 table: "Baskets",
                 column: "Amount",
-                unique: true);
+                unique: true,
+                filter: "[Amount] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderProducts_OrderId",
@@ -466,11 +464,6 @@ namespace ComputerTechnicianBackend.Data.EF.SQL.Migrations
                 name: "IX_PersonalDatas_CreditCardId",
                 table: "PersonalDatas",
                 column: "CreditCardId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PersonalDatas_EmailId",
-                table: "PersonalDatas",
-                column: "EmailId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PersonalDatas_PhoneId",
@@ -561,6 +554,9 @@ namespace ComputerTechnicianBackend.Data.EF.SQL.Migrations
                 name: "SupplierProductManufactures");
 
             migrationBuilder.DropTable(
+                name: "UsersView");
+
+            migrationBuilder.DropTable(
                 name: "Baskets");
 
             migrationBuilder.DropTable(
@@ -598,9 +594,6 @@ namespace ComputerTechnicianBackend.Data.EF.SQL.Migrations
 
             migrationBuilder.DropTable(
                 name: "CreditCards");
-
-            migrationBuilder.DropTable(
-                name: "Emails");
 
             migrationBuilder.DropTable(
                 name: "Phones");

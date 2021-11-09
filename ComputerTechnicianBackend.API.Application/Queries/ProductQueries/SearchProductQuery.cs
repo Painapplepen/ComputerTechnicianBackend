@@ -68,7 +68,6 @@ namespace ComputerTechnicianBackend.API.Application.Queries.ProductQueries
             {
                 Id = product.Id,
                 Name = product.Name,
-                ReleaseDate = product.ReleaseDate,
                 Processor = product.Processor,
                 VidioCard = product.VidioCard,
                 MemoryCapacity = product.MemoryCapacity,

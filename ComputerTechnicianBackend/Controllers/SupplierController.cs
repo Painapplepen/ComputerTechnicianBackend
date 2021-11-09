@@ -17,7 +17,8 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace ComputerTechnicianBackend.API.Host.Controllers
 {
-    [Route("api/supplier")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/supplier")]
     [ApiController]
     [Authorize]
     public class SupplierController : MediatingControllerBase

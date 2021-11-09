@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ComputerTechnicianBackend.Data.Services.Extensions;
+using System;
 
 namespace ComputerTechnicianBackend.Data.Services
 {
@@ -49,7 +50,7 @@ namespace ComputerTechnicianBackend.Data.Services
 
             var count = await query.LongCountAsync();
 
-            return count;
+            return (int)Math.Ceiling((double)count / searchCondition.PageSize);
         }
 
         private IQueryable<Product> BuildFindQuery(ProductSearchCondition searchCondition)

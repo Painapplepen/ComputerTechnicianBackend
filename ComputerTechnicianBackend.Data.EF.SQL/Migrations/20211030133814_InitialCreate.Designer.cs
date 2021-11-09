@@ -4,14 +4,16 @@ using ComputerTechnicianBackend.Data.EF.SQL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ComputerTechnicianBackend.Data.EF.SQL.Migrations
 {
     [DbContext(typeof(ComputerTechnicianDbContext))]
-    partial class ComputerTechnicianDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211030133814_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,13 +31,11 @@ namespace ComputerTechnicianBackend.Data.EF.SQL.Migrations
                     b.Property<long?>("Amount")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("Amount")
+                        .IsUnique()
+                        .HasFilter("[Amount] IS NOT NULL");
 
                     b.ToTable("Baskets");
                 });
@@ -477,79 +477,35 @@ namespace ComputerTechnicianBackend.Data.EF.SQL.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("ComputerTechnicianBackend.Data.Domain.Views.PersonalDataView", b =>
-                {
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("CardNumber")
-                        .HasColumnType("bigint")
-                        .HasColumnName("CardNumber");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("City");
-
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("DateOfBirth");
-
-                    b.Property<string>("EpirationDate")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("EpirationDate");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Name");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Phone");
-
-                    b.Property<string>("SecondName")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("SecondName");
-
-                    b.HasKey("Id");
-
-                    b.ToView("View_PersonalDataView");
-                });
-
             modelBuilder.Entity("ComputerTechnicianBackend.Data.Domain.Views.UserView", b =>
                 {
                     b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<long>("BasketSize")
-                        .HasColumnType("bigint")
-                        .HasColumnName("BasketSize");
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Email");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Role")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Role");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("UserName");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToView("View_UserView");
+                    b.ToTable("UsersView");
                 });
 
             modelBuilder.Entity("ComputerTechnicianBackend.Data.Domain.Models.Basket", b =>
                 {
                     b.HasOne("ComputerTechnicianBackend.Data.Domain.Models.User", "User")
                         .WithOne("Basket")
-                        .HasForeignKey("ComputerTechnicianBackend.Data.Domain.Models.Basket", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ComputerTechnicianBackend.Data.Domain.Models.Basket", "Amount");
 
                     b.Navigation("User");
                 });

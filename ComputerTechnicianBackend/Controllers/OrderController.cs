@@ -15,7 +15,8 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace ComputerTechnicianBackend.API.Host.Controllers
 {
-    [Route("api/order")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/order")]
     [ApiController]
     [Authorize]
     public class OrderController : MediatingControllerBase

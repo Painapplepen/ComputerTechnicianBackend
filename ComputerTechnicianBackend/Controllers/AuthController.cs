@@ -19,23 +19,24 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace ComputerTechnicianBackend.API.Host.Controllers
 {
-    [Route("api/auth")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/auth")]
     [ApiController]
     public class AuthController : MediatingControllerBase
     {
         public AuthController(IMediator mediator) : base(mediator)
         { }
 
-        [HttpPost]
+        [HttpPost("login")]
         [AllowAnonymous]
-        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(string))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(LoginUserDTO))]
         [SwaggerOperation(Summary = "Login", OperationId = "Login")]
-        public async Task<IActionResult> Login([FromBody] UserDTO user, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> Login([FromBody] LoginDTO user, CancellationToken cancellationToken = default)
         {
             return await ExecuteQueryAsync(new LoginUserQuery(user), cancellationToken: cancellationToken);
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         [AllowAnonymous]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(bool))]
         [SwaggerOperation(Summary = "Register", OperationId = "Register")]

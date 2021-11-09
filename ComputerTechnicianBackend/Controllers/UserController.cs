@@ -15,7 +15,8 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace ComputerTechnicianBackend.API.Host.Controllers
 {
-    [Route("api/user")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/user")]
     [ApiController]
     [Authorize]
     public class UserController : MediatingControllerBase

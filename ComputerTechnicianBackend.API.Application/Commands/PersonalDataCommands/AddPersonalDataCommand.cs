@@ -28,6 +28,9 @@ namespace ComputerTechnicianBackend.API.Application.Commands.PersonalDataCommand
             ICreditCardService creditCardService, IPhoneService phoneService, ICityService cityService)
         {
             this.personalDataService = personalDataService;
+            this.creditCardService = creditCardService;
+            this.phoneService = phoneService;
+            this.cityService = cityService;
         }
 
         public async Task<long> Handle(AddPersonalDataCommand request, CancellationToken cancellationToken)

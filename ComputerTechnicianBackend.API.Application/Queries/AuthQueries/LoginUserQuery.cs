@@ -1,5 +1,6 @@
 ﻿using ComputerTechnicianBackend.API.Application.Commands.Abstractions;
 using ComputerTechnicianBackend.API.Contracts.IncomingOutgoing;
+using ComputerTechnicianBackend.API.Contracts.Outgoing;
 using ComputerTechnicianBackend.Data.Services;
 using MediatR;
 using System.Threading;
@@ -7,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace ComputerTechnicianBackend.API.Application.Queries.AuthQueries
 {
-    public class LoginUserQuery : UserCommandBase<string>
+    public class LoginUserQuery : LoginCommandBase<LoginUserDTO>
     {
-        public LoginUserQuery(UserDTO user) : base(user) { }
+        public LoginUserQuery(LoginDTO user) : base(user) { }
     }
 
-    public class LoginUserQueryHandler : IRequestHandler<LoginUserQuery, string>
+    public class LoginUserQueryHandler : IRequestHandler<LoginUserQuery, LoginUserDTO>
     {
         private readonly IUserService userService;
         private readonly IRoleService roleService;
@@ -23,7 +24,7 @@ namespace ComputerTechnicianBackend.API.Application.Queries.AuthQueries
             this.roleService = roleService;
         }
 
-        public async Task<string> Handle(LoginUserQuery request, CancellationToken cancellationToken)
+        public async Task<LoginUserDTO> Handle(LoginUserQuery request, CancellationToken cancellationToken)
         {
             var user = await userService.LoginAsync(request.Entity);
 
@@ -41,7 +42,7 @@ namespace ComputerTechnicianBackend.API.Application.Queries.AuthQueries
 
             var token = userService.CreateToken(user, role.Name);
 
-            return token;
+            return new LoginUserDTO { Role = role.Name , Token = token};
         }
 
     }

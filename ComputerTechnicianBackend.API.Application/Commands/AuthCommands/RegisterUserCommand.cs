@@ -17,9 +17,11 @@ namespace ComputerTechnicianBackend.API.Application.Commands.AuthCommands
     public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, bool>
     {
         private readonly IUserService userService;
+        private readonly IBasketService basketService;
 
-        public RegisterUserCommandHandler(IUserService userService)
+        public RegisterUserCommandHandler(IUserService userService, IBasketService basketService)
         {
+            this.basketService = basketService;
             this.userService = userService;
         }
 
@@ -27,7 +29,7 @@ namespace ComputerTechnicianBackend.API.Application.Commands.AuthCommands
         {
             var checkingForExist = await userService.ExistAsync(request.Entity);
 
-            if (!checkingForExist)
+            if (checkingForExist)
             {
                 return false;
             }
@@ -41,6 +43,13 @@ namespace ComputerTechnicianBackend.API.Application.Commands.AuthCommands
                 return false;
             }
 
+            var getBasket = GetBasket(insertedUser.Id);
+            var addedBasket = await basketService.InsertAsync(getBasket);
+
+            if(addedBasket == null)
+            {
+                return false;
+            }
             return true;
         }
 
@@ -52,6 +61,15 @@ namespace ComputerTechnicianBackend.API.Application.Commands.AuthCommands
                 UserName = user.UserName,
                 Password = user.Password,
                 RoleId = roleId
+            };
+        }
+
+        private Basket GetBasket(long userId)
+        {
+            return new Basket
+            {
+                UserId = userId,
+                Amount = 0,
             };
         }
     }

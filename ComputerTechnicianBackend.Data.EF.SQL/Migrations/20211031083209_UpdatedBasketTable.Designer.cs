@@ -10,15 +10,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ComputerTechnicianBackend.Data.EF.SQL.Migrations
 {
     [DbContext(typeof(ComputerTechnicianDbContext))]
-    [Migration("20210812135838_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20211031083209_UpdatedBasketTable")]
+    partial class UpdatedBasketTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.9")
+                .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("ComputerTechnicianBackend.Data.Domain.Models.Basket", b =>
@@ -28,12 +28,15 @@ namespace ComputerTechnicianBackend.Data.EF.SQL.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("Amount")
+                    b.Property<long?>("Amount")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("UserId")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Amount")
+                    b.HasIndex("UserId")
                         .IsUnique();
 
                     b.ToTable("Baskets");
@@ -70,21 +73,6 @@ namespace ComputerTechnicianBackend.Data.EF.SQL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CreditCards");
-                });
-
-            modelBuilder.Entity("ComputerTechnicianBackend.Data.Domain.Models.Email", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Emails");
                 });
 
             modelBuilder.Entity("ComputerTechnicianBackend.Data.Domain.Models.Manufacture", b =>
@@ -169,22 +157,19 @@ namespace ComputerTechnicianBackend.Data.EF.SQL.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("CityId")
+                    b.Property<long?>("CityId")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("CreditCardId")
+                    b.Property<long?>("CreditCardId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("EmailId")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("PhoneId")
+                    b.Property<long?>("PhoneId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("SecondName")
@@ -195,8 +180,6 @@ namespace ComputerTechnicianBackend.Data.EF.SQL.Migrations
                     b.HasIndex("CityId");
 
                     b.HasIndex("CreditCardId");
-
-                    b.HasIndex("EmailId");
 
                     b.HasIndex("PhoneId");
 
@@ -469,13 +452,16 @@ namespace ComputerTechnicianBackend.Data.EF.SQL.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("BasketId")
+                    b.Property<long?>("BasketId")
                         .HasColumnType("bigint");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("PersonalDataId")
+                    b.Property<long?>("PersonalDataId")
                         .HasColumnType("bigint");
 
                     b.Property<long>("RoleId")
@@ -493,11 +479,77 @@ namespace ComputerTechnicianBackend.Data.EF.SQL.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("ComputerTechnicianBackend.Data.Domain.Views.PersonalDataView", b =>
+                {
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long>("CardNumber")
+                        .HasColumnType("bigint")
+                        .HasColumnName("CardNumber");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("City");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DateOfBirth");
+
+                    b.Property<string>("EpirationDate")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("EpirationDate");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Name");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Phone");
+
+                    b.Property<string>("SecondName")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("SecondName");
+
+                    b.HasKey("Id");
+
+                    b.ToView("View_PersonalDataView");
+                });
+
+            modelBuilder.Entity("ComputerTechnicianBackend.Data.Domain.Views.UserView", b =>
+                {
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long>("BasketSize")
+                        .HasColumnType("bigint")
+                        .HasColumnName("BasketSize");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Email");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Role");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("UserName");
+
+                    b.HasKey("Id");
+
+                    b.ToView("View_UserView");
+                });
+
             modelBuilder.Entity("ComputerTechnicianBackend.Data.Domain.Models.Basket", b =>
                 {
                     b.HasOne("ComputerTechnicianBackend.Data.Domain.Models.User", "User")
                         .WithOne("Basket")
-                        .HasForeignKey("ComputerTechnicianBackend.Data.Domain.Models.Basket", "Amount")
+                        .HasForeignKey("ComputerTechnicianBackend.Data.Domain.Models.Basket", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -538,33 +590,19 @@ namespace ComputerTechnicianBackend.Data.EF.SQL.Migrations
                 {
                     b.HasOne("ComputerTechnicianBackend.Data.Domain.Models.City", "Cities")
                         .WithMany()
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CityId");
 
                     b.HasOne("ComputerTechnicianBackend.Data.Domain.Models.CreditCard", "CreditCards")
                         .WithMany()
-                        .HasForeignKey("CreditCardId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ComputerTechnicianBackend.Data.Domain.Models.Email", "Email")
-                        .WithMany()
-                        .HasForeignKey("EmailId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CreditCardId");
 
                     b.HasOne("ComputerTechnicianBackend.Data.Domain.Models.Phone", "Phones")
                         .WithMany()
-                        .HasForeignKey("PhoneId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PhoneId");
 
                     b.Navigation("Cities");
 
                     b.Navigation("CreditCards");
-
-                    b.Navigation("Email");
 
                     b.Navigation("Phones");
                 });
@@ -679,9 +717,7 @@ namespace ComputerTechnicianBackend.Data.EF.SQL.Migrations
                 {
                     b.HasOne("ComputerTechnicianBackend.Data.Domain.Models.PersonalData", "PersonalData")
                         .WithMany()
-                        .HasForeignKey("PersonalDataId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PersonalDataId");
 
                     b.HasOne("ComputerTechnicianBackend.Data.Domain.Models.Role", "Roles")
                         .WithMany()

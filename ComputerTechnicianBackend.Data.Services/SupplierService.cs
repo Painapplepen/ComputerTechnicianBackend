@@ -52,7 +52,7 @@ namespace ComputerTechnicianBackend.Data.Services
 
             var count = await query.LongCountAsync();
 
-            return count;
+            return (int)Math.Ceiling((double)count / searchCondition.PageSize);
         }
 
         private IQueryable<Supplier> BuildFindQuery(SupplierSearchCondition searchCondition)

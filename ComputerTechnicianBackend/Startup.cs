@@ -33,7 +33,7 @@ namespace ComputerTechnicianBackend
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddCors();
+            services.ConfigureCors();
             services.ConfigureJWT(Configuration);
             services.AddDbContext<ComputerTechnicianDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("ComputerTechnicianDbContext")));

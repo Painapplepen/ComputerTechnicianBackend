@@ -32,6 +32,7 @@ namespace ComputerTechnicianBackend.Data.EF.SQL
         public DbSet<SupplierProductManufacture> SupplierProductManufactures { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserView> UsersView { get; set; }
+        public DbSet<PersonalDataView> PersonalDataView { get; set; }
 
         public ComputerTechnicianDbContext(DbContextOptions<ComputerTechnicianDbContext> options) 
             : base(options) { }
