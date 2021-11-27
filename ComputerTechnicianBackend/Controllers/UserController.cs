@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using ComputerTechnicianBackend.API.Application.Commands.UserCommands;
 using ComputerTechnicianBackend.API.Application.Queries.UserQueries;
@@ -62,6 +63,14 @@ namespace ComputerTechnicianBackend.API.Host.Controllers
         public async Task<IActionResult> GetUser([FromRoute] long id, CancellationToken cancellationToken = default)
         {
             return await ExecuteQueryAsync(new GetUserQuery(id), cancellationToken: cancellationToken);
+        }
+
+        [HttpGet]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(IReadOnlyCollection<FoundUserDTO>))]
+        [SwaggerOperation(Summary = "Get all users", OperationId = "GetAllUsers")]
+        public async Task<IActionResult> GetAllUsers(CancellationToken cancellationToken = default)
+        {
+            return await ExecuteQueryAsync(new GetAllUserQuery(), cancellationToken: cancellationToken);
         }
     }
 }

@@ -4,14 +4,16 @@ using ComputerTechnicianBackend.Data.EF.SQL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ComputerTechnicianBackend.Data.EF.SQL.Migrations
 {
     [DbContext(typeof(ComputerTechnicianDbContext))]
-    partial class ComputerTechnicianDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211127104432_DeleteDateTime")]
+    partial class DeleteDateTime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

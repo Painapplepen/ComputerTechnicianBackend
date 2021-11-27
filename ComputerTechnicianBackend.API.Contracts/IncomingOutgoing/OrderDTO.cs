@@ -9,7 +9,8 @@ namespace ComputerTechnicianBackend.API.Contracts.IncomingOutgoing
     public class OrderDTO
     {
         public string OrderStatus { get; set; }
-        public DateTime OrderDate { get; set; }
-        public DateTime OrderTime { get; set; }
+        public string OrderDate { get; set; }
+        public string OrderTime { get; set; }
+        public long ManufactureId { get; set; }
     }
 }

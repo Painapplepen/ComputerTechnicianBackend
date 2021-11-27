@@ -87,7 +87,7 @@ namespace ComputerTechnicianBackend.Data.Services
                 }
             }
 
-            if (searchCondition.MemoryCapacity != null)
+            if (searchCondition.MemoryCapacity.Any())
             {
                 foreach (var memoryCapacity in searchCondition.MemoryCapacity)
                 {
@@ -105,7 +105,7 @@ namespace ComputerTechnicianBackend.Data.Services
                 }
             }
 
-            if (searchCondition.ScreenDiagonal != null)
+            if (searchCondition.ScreenDiagonal.Any())
             {
                 foreach (var screenDiagonal in searchCondition.ScreenDiagonal)
                 {
@@ -113,7 +113,7 @@ namespace ComputerTechnicianBackend.Data.Services
                 }
             }
 
-            if (searchCondition.ScreenResolution.Any())
+            if (searchCondition.ScreenResolution != null)
             {
                 foreach (var screenResolution in searchCondition.ScreenResolution)
                 {
@@ -124,7 +124,7 @@ namespace ComputerTechnicianBackend.Data.Services
                 }
             }
 
-            if (searchCondition.Cost != null)
+            if (searchCondition.Cost.Any())
             {
                 foreach (var cost in searchCondition.Cost)
                 {
@@ -132,7 +132,7 @@ namespace ComputerTechnicianBackend.Data.Services
                 }
             }
 
-            if (searchCondition.Amount != null)
+            if (searchCondition.Amount.Any())
             {
                 foreach (var amount in searchCondition.Amount)
                 {
@@ -140,7 +140,7 @@ namespace ComputerTechnicianBackend.Data.Services
                 }
             }
 
-            if (searchCondition.InStock != null)
+            if (searchCondition.InStock.Any())
             {
                 foreach (var inStock in searchCondition.InStock)
                 {

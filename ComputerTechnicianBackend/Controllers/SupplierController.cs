@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using ComputerTechnicianBackend.API.Application.Commands.ProductCommands;
 using ComputerTechnicianBackend.API.Application.Commands.SupplierCommands;
@@ -64,6 +65,14 @@ namespace ComputerTechnicianBackend.API.Host.Controllers
         public async Task<IActionResult> GetSupplier([FromRoute] long id, CancellationToken cancellationToken = default)
         {
             return await ExecuteQueryAsync(new GetSupplierQuery(id), cancellationToken: cancellationToken);
+        }
+
+        [HttpGet]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(IReadOnlyCollection<FoundSupplierDTO>))]
+        [SwaggerOperation(Summary = "Get all suppliers", OperationId = "GetAllSuppliers")]
+        public async Task<IActionResult> GetAllSuppliers(CancellationToken cancellationToken = default)
+        {
+            return await ExecuteQueryAsync(new GetAllSupplierQuery(), cancellationToken: cancellationToken);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace ComputerTechnicianBackend.Data.Domain.Models
         public Manufacture Manufacture { get; set; }
         public long ManufactureId { get; set; }
         public string OrderStatus { get; set; }
-        public DateTime OrderDate { get; set; }
-        public DateTime OrderTime { get; set; }
+        public string OrderDate { get; set; }
+        public string OrderTime { get; set; }
     }
 }

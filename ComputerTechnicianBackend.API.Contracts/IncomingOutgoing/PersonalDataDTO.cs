@@ -10,7 +10,7 @@ namespace ComputerTechnicianBackend.API.Contracts.IncomingOutgoing
     {
         public string Name { get; set; }
         public string SecondName { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public string DateOfBirth { get; set; }
         public string City { get; set; }
         public string Phone { get; set; }
         public long CardNumber { get; set; }

@@ -61,6 +61,7 @@ namespace ComputerTechnicianBackend.Data.Services.Abstraction
             if (entity != null)
             {
                 dbSet.Remove(entity);
+                await dbContext.SaveChangesAsync();
             }
         }
     }

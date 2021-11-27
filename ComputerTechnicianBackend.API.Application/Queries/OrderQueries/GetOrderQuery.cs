@@ -45,7 +45,8 @@ namespace ComputerTechnicianBackend.API.Application.Queries.OrderQueries
             {
                 OrderStatus = order.OrderStatus,
                 OrderDate = order.OrderDate,
-                OrderTime = order.OrderTime
+                OrderTime = order.OrderTime,
+                ManufactureId = order.ManufactureId
             };
         }
     }

@@ -46,7 +46,7 @@ namespace ComputerTechnicianBackend.API.Application.Queries.ManafactureQueries
                 City = manufacture.City,
                 Country = manufacture.Country,
                 Name = manufacture.Name
-            }; ;
+            }; 
         }
     }
 }

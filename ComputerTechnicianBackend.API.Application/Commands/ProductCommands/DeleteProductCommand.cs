@@ -21,16 +21,16 @@ namespace ComputerTechnicianBackend.API.Application.Commands.ProductCommands
 
     public class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommand>
     {
-        private readonly IOrderService orderService;
+        private readonly IProductService productService;
 
-        public DeleteProductCommandHandler(IOrderService orderService)
+        public DeleteProductCommandHandler(IProductService productService)
         {
-            this.orderService = orderService;
+            this.productService = productService;
         }
 
         public async Task<Unit> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
         {
-            await orderService.DeleteAsync(request.Id, cancellationToken);
+            await productService.DeleteAsync(request.Id, cancellationToken);
             return Unit.Value;
         }
     }

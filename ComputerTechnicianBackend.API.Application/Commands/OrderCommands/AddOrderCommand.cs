@@ -40,7 +40,8 @@ namespace ComputerTechnicianBackend.API.Application.Commands.OrderCommands
             {
                 OrderStatus = order.OrderStatus,
                 OrderDate = order.OrderDate,
-                OrderTime = order.OrderTime
+                OrderTime = order.OrderTime,
+                ManufactureId = order.ManufactureId
             };
         }
     }

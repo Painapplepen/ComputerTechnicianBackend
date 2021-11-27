@@ -9,7 +9,7 @@ namespace ComputerTechnicianBackend.API.Contracts.IncomingOutgoing
     public class ProductDTO
     {
         public string Name { get; set; }
-        public DateTime ReleaseDate { get; set; }
+        public string ReleaseDate { get; set; }
         public string Processor { get; set; }
         public string VidioCard { get; set; }
         public long MemoryCapacity { get; set; }

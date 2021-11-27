@@ -7,7 +7,7 @@ namespace ComputerTechnicianBackend.Data.Domain.Models
     {
         public string Name { get; set; }
         public string Image { get; set; }
-        public DateTime ReleaseDate { get; set; }
+        public string ReleaseDate { get; set; }
         public string Processor { get; set; }
         public string VidioCard { get; set; }
         public long MemoryCapacity { get; set; }

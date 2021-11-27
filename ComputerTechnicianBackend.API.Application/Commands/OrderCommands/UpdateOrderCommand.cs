@@ -53,6 +53,7 @@ namespace ComputerTechnicianBackend.API.Application.Commands.OrderCommands
             order.OrderStatus = orderDTO.OrderStatus;
             order.OrderDate = orderDTO.OrderDate;
             order.OrderTime = orderDTO.OrderTime;
+            order.ManufactureId = orderDTO.ManufactureId;
 
             return order;
         }
@@ -63,7 +64,8 @@ namespace ComputerTechnicianBackend.API.Application.Commands.OrderCommands
             {
                 OrderStatus = order.OrderStatus,
                 OrderDate = order.OrderDate,
-                OrderTime = order.OrderTime
+                OrderTime = order.OrderTime,
+                ManufactureId = order.ManufactureId
             };
         }
     }

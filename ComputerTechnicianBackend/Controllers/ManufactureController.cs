@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using ComputerTechnicianBackend.API.Application.Commands.ManafactureCommands;
 using ComputerTechnicianBackend.API.Application.Queries.ManafactureQueries;
@@ -62,6 +63,14 @@ namespace ComputerTechnicianBackend.API.Host.Controllers
         public async Task<IActionResult> GetManufacture([FromRoute] long id, CancellationToken cancellationToken = default)
         {
             return await ExecuteQueryAsync(new GetManufactureQuery(id), cancellationToken: cancellationToken);
+        }
+
+        [HttpGet]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(IReadOnlyCollection<FoundManufactureDTO>))]
+        [SwaggerOperation(Summary = "Get all manufactures", OperationId = "GetAllManufactures")]
+        public async Task<IActionResult> GetAllManufactures(CancellationToken cancellationToken = default)
+        {
+            return await ExecuteQueryAsync(new GetAllManufactureQuery(), cancellationToken: cancellationToken);
         }
     }
 }
